@@ -1,9 +1,9 @@
 import React from 'react';
 
 // Import gambar dari folder assets
-import network1 from '../assets/img/network (1).jpg';
-import network2 from '../assets/img/network (2).jpg';
-import network3 from '../assets/img/network (3).jpg';
+import network1 from '../../assets/images/network (1).jpg';
+import network2 from '../../assets/images/network (2).jpg';
+import network3 from '../../assets/images/network (3).jpg';
 
 // Data untuk service cards (lebih mudah dikelola)
 const servicesData = [

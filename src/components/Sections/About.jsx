@@ -1,5 +1,5 @@
-import "../script/script.js";
-import about from "../assets/img/training2.png"
+import "../../script/script.js";
+import about from "../../assets/images/training2.png"
 
 export default function About() {
   return (

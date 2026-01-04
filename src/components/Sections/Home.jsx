@@ -1,5 +1,5 @@
-import "../script/script.js";
-import computer from "../assets/img/computer.png"
+import "../../script/script.js";
+import computer from "../../assets/images/computer.png"
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
           Dapatkan pembelajaran ethical hacking <br className="br1" /> dan cyber security terbaik.
         </p>
         <a href="#Silabus">
-        <button className="btnJoin">Join Now</button>
+          <button className="btnJoin">Join Now</button>
         </a>
       </section>
 

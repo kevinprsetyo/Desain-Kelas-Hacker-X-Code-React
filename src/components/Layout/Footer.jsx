@@ -1,5 +1,5 @@
 import React from 'react';
-import xcodeLogo from  '../assets/img/Xcode.png';
+import xcodeLogo from '../../assets/images/Xcode.png';
 
 const Footer = () => {
     return (

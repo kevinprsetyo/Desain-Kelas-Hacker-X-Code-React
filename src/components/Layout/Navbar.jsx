@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import xcodeLogo from "../assets/img/xcode.jpg";
-import hamburger from "../assets/img/bar.png";
-import home from "../assets/img/home.svg";
-import about from "../assets/img/about.svg";
-import silabus from "../assets/img/silabus.svg";
-import fasilitas from "../assets/img/fasilitas.svg";
-import testimoni from "../assets/img/testimoni.svg";
-import team from "../assets/img/team.svg";
-import client from "../assets/img/client.svg";
-import contact from "../assets/img/contact.svg";
+import xcodeLogo from "../../assets/images/xcode.jpg";
+import hamburger from "../../assets/images/bar.png";
+import home from "../../assets/images/ui/home.svg";
+import about from "../../assets/images/ui/about.svg";
+import silabus from "../../assets/images/ui/silabus.svg";
+import fasilitas from "../../assets/images/ui/fasilitas.svg";
+import testimoni from "../../assets/images/ui/testimoni.svg";
+import team from "../../assets/images/ui/team.svg";
+import client from "../../assets/images/ui/client.svg";
+import contact from "../../assets/images/ui/contact.svg";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -55,14 +55,14 @@ export default function Navbar() {
             <li
               key={item.name}
               className={activeMenu === item.name ? "active" : ""}
-              onClick={() => 
-                {setActiveMenu(item.name);
+              onClick={() => {
+                setActiveMenu(item.name);
                 setMenuOpen(false);
-                }}
+              }}
             >
-               <a href={`#${item.name}`}>
-              <img src={item.icon} alt={item.name} />
-              <span>{item.name}</span>
+              <a href={`#${item.name}`}>
+                <img src={item.icon} alt={item.name} />
+                <span>{item.name}</span>
               </a>
             </li>
           ))}

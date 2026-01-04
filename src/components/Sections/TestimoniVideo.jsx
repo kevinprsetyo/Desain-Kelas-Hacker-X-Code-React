@@ -1,14 +1,14 @@
 // src/components/VideoTestimonialSlider.jsx
 
 import React, { useState, useEffect, useRef } from 'react';
-import left from "../assets/img/left.svg"
-import right from "../assets/img/right.svg"
-import imamImg from "../assets/img/testimoni 01_Imam.png"
-import adiImg from "../assets/img/testimoni 02_Adi.png"
-import evendiImg from "../assets/img/testimoni 03_efendi.png"
-import taufikImg from "../assets/img/testimoni 04_taufik.png"
-import rizalImg from "../assets/img/testimoni 05_rizal.png"
-import larasImg from "../assets/img/testimoni 06_laras.png"
+import left from "../../assets/images/ui/left.svg"
+import right from "../../assets/images/ui/right.svg"
+import imamImg from "../../assets/images/people/testimoni 01_Imam.png"
+import adiImg from "../../assets/images/people/testimoni 02_Adi.png"
+import evendiImg from "../../assets/images/people/testimoni 03_efendi.png"
+import taufikImg from "../../assets/images/people/testimoni 04_taufik.png"
+import rizalImg from "../../assets/images/people/testimoni 05_rizal.png"
+import larasImg from "../../assets/images/people/testimoni 06_laras.png"
 
 const videoTestimonials = [
   { id: 1, name: 'Imam', title: 'Alumni Ehtical Elite Hacker', img: imamImg, videoId: 'y9BL_woOwJE' },
@@ -46,17 +46,17 @@ const TestimoniVideo = () => {
       setCurrentIndex(Math.max(0, videoTestimonials.length - cardsPerView));
     }
   }, [cardsPerView, currentIndex]);
-  
+
   const handlePrev = () => {
     setCurrentIndex(prev => (prev > 0 ? prev - 1 : 0));
   };
-  
+
   const handleNext = () => {
     if (currentIndex < videoTestimonials.length - cardsPerView) {
       setCurrentIndex(prev => prev + 1);
     }
   };
-  
+
   // Calculate the offset for the transform
   const cardWidth = wrapperRef.current ? wrapperRef.current.children[0]?.offsetWidth + 15 : 0;
   const offset = -currentIndex * cardWidth;
@@ -66,20 +66,20 @@ const TestimoniVideo = () => {
       <h1 className="testimonial-title">Testimoni Video Training di X-CODE</h1>
       <h3>Ulasan Pelanggan Kami (Video)</h3>
       <div className="testimonial-carousel">
-        <div 
-          className="testimonial-cards-wrapper" 
+        <div
+          className="testimonial-cards-wrapper"
           ref={wrapperRef}
-          style={{ transform: `translateX(${offset}px)`}}
+          style={{ transform: `translateX(${offset}px)` }}
         >
           {videoTestimonials.map(testimonial => (
             <div className="testimonial-card" key={testimonial.id}>
               <div className="testimonial-inner">
                 <div className="stars">★★★★★</div>
                 <div className="media-content">
-                  <iframe 
+                  <iframe
                     src={`https://www.youtube.com/embed/${testimonial.videoId}`}
                     title={testimonial.name}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   ></iframe>
                 </div>
