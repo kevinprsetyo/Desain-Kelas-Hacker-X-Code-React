@@ -41,7 +41,7 @@ const Services = () => {
                         <img src={service.img} alt={service.alt} />
                         <h3>{service.title}</h3>
                         <p>{service.description}</p>
-                        <a href="#" className="read-more-btn">Read More</a>
+                        {/* <a href="#" className="read-more-btn">Read More</a> */}
                     </div>
                 ))}
             </div>

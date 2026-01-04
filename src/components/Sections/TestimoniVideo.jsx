@@ -1,8 +1,8 @@
 // src/components/VideoTestimonialSlider.jsx
 
 import React, { useState, useEffect, useRef } from 'react';
-import left from "../../assets/images/ui/left.svg"
-import right from "../../assets/images/ui/right.svg"
+import left from "../../assets/images/ui/left2.svg"
+import right from "../../assets/images/ui/right2.svg"
 import imamImg from "../../assets/images/people/testimoni 01_Imam.png"
 import adiImg from "../../assets/images/people/testimoni 02_Adi.png"
 import evendiImg from "../../assets/images/people/testimoni 03_efendi.png"
@@ -22,6 +22,8 @@ const videoTestimonials = [
 const TestimoniVideo = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cardsPerView, setCardsPerView] = useState(3);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
   const wrapperRef = useRef(null);
 
   // Function to determine cards per view based on window width
@@ -57,6 +59,33 @@ const TestimoniVideo = () => {
     }
   };
 
+  // Touch handlers for swipe
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      handleNext();
+    }
+    if (isRightSwipe) {
+      handlePrev();
+    }
+
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
   // Calculate the offset for the transform
   const cardWidth = wrapperRef.current ? wrapperRef.current.children[0]?.offsetWidth + 15 : 0;
   const offset = -currentIndex * cardWidth;
@@ -64,12 +93,15 @@ const TestimoniVideo = () => {
   return (
     <div className="testimonial-section" id='Testimonial'>
       <h1 className="testimonial-title">Testimoni Video Training di X-CODE</h1>
-      <h3>Ulasan Pelanggan Kami (Video)</h3>
+      {/* <h3>Ulasan Pelanggan Kami (Video)</h3> */}
       <div className="testimonial-carousel">
         <div
           className="testimonial-cards-wrapper"
           ref={wrapperRef}
           style={{ transform: `translateX(${offset}px)` }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           {videoTestimonials.map(testimonial => (
             <div className="testimonial-card" key={testimonial.id}>
@@ -96,8 +128,16 @@ const TestimoniVideo = () => {
         </div>
       </div>
       <div className="controls">
-        <button id="prev" onClick={handlePrev}><img src={left} alt="" /></button>
-        <button id="next" onClick={handleNext}><img src={right} alt="" /></button>
+        <button className="nav-button prev" onClick={handlePrev}>
+          <div className="nav-arrow">
+            <img src={right} alt="Prev" />
+          </div>
+        </button>
+        <button className="nav-button next" onClick={handleNext}>
+          <div className="nav-arrow">
+            <img src={left} alt="Next" />
+          </div>
+        </button>
       </div>
     </div>
   );

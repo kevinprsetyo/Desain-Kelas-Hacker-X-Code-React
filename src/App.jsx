@@ -13,6 +13,7 @@ import ExpertInstructor from './components/Sections/ExperienceMentor';
 import OfficeLocations from './components/Sections/OfficeLocation';
 import Client from './components/Sections/Client';
 import Biaya from './components/Sections/Biaya';
+// Note: imports are swapped to match original/user intent (TestimoniVideo imports content from TestimoniText file, etc.)
 import TestimoniVideo from './components/Sections/TestimoniText';
 import TestimoniText from './components/Sections/TestimoniVideo';
 

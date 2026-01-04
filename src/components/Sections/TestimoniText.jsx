@@ -17,7 +17,7 @@ const textTestimonials = [
         id: 11,
         name: "Imam", // Nama disesuaikan
         img: imamImg, // Menggunakan variabel yang diimpor
-        text: "Mantaf ilmunya, menunjang sekali dalam pekerjaan. Kebetulan saya bekerja disalah satu perusahaan IT.",
+        text: "Mantap ilmunya, menunjang sekali dalam pekerjaan. Kebetulan saya bekerja disalah satu perusahaan IT.",
     },
     {
         id: 12,
@@ -55,6 +55,8 @@ const TestimoniText = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isPaused, setIsPaused] = useState(false);
     const [offset, setOffset] = useState(0);
+    const [touchStart, setTouchStart] = useState(0);
+    const [touchEnd, setTouchEnd] = useState(0);
 
     const sliderRef = useRef(null);
     const wrapperRef = useRef(null);
@@ -71,6 +73,33 @@ const TestimoniText = () => {
     const handleNext = useCallback(() => {
         goToSlide(currentSlide + 1);
     }, [currentSlide, goToSlide]);
+
+    // Touch handlers for swipe
+    const handleTouchStart = (e) => {
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchMove = (e) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > 50;
+        const isRightSwipe = distance < -50;
+
+        if (isLeftSwipe) {
+            handleNext();
+        }
+        if (isRightSwipe) {
+            handlePrev();
+        }
+
+        setTouchStart(0);
+        setTouchEnd(0);
+    };
 
     useEffect(() => {
         if (isPaused) return;
@@ -117,6 +146,9 @@ const TestimoniText = () => {
                     className="testimonial-slider"
                     ref={sliderRef}
                     style={{ transform: `translateX(${offset}px)` }}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
                 >
                     {textTestimonials.map((testimonial, index) => (
                         <div

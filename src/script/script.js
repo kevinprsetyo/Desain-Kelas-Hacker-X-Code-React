@@ -2,17 +2,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.querySelector(".nav-laptop");
 
-  hamburger.addEventListener("click", () => {
-    if (window.innerWidth < 1024) { 
-      navMenu.classList.toggle("active");
-    }
-  });
+  // Check if elements exist before adding event listeners
+  if (hamburger && navMenu) {
+    hamburger.addEventListener("click", () => {
+      if (window.innerWidth < 1024) {
+        navMenu.classList.toggle("active");
+      }
+    });
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 1024) {
-      navMenu.classList.remove("active");
-    }
-  });
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 1024) {
+        navMenu.classList.remove("active");
+      }
+    });
+  }
 });
 
 

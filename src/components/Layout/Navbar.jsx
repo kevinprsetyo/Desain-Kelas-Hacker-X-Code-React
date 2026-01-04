@@ -25,15 +25,42 @@ export default function Navbar() {
   }, []);
 
   const menus = [
-    { name: "Home", icon: home },
-    { name: "About Us", icon: about },
-    { name: "Silabus", icon: silabus },
-    { name: "Fasilitas", icon: fasilitas },
-    { name: "Testimonial", icon: testimoni },
-    { name: "Team", icon: team },
-    { name: "Our Client", icon: client },
-    { name: "Contact", icon: contact },
+    { label: "Home", id: "Home", icon: home },
+    { label: "About Us", id: "AboutUs", icon: about },
+    { label: "Silabus", id: "Silabus", icon: silabus },
+    { label: "Fasilitas", id: "Fasilitas", icon: fasilitas },
+    { label: "Testimonial", id: "Testimonial", icon: testimoni },
+    { label: "Team And Mentor", id: "TeamAndMentor", icon: team },
+    { label: "Our Client", id: "OurClient", icon: client },
+    { label: "Contact", id: "Contact", icon: contact },
   ];
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-50% 0px -50% 0px", // Trigger when section is in middle of viewport
+      threshold: 0
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveMenu(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    menus.forEach((menu) => {
+      const element = document.getElementById(menu.id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="header">
@@ -53,16 +80,16 @@ export default function Navbar() {
         <ul className={`nav-laptop ${menuOpen ? "active" : ""}`}>
           {menus.map((item) => (
             <li
-              key={item.name}
-              className={activeMenu === item.name ? "active" : ""}
+              key={item.id}
+              className={activeMenu === item.id ? "active" : ""}
               onClick={() => {
-                setActiveMenu(item.name);
+                setActiveMenu(item.id);
                 setMenuOpen(false);
               }}
             >
-              <a href={`#${item.name}`}>
-                <img src={item.icon} alt={item.name} />
-                <span>{item.name}</span>
+              <a href={`#${item.id}`}>
+                <img src={item.icon} alt={item.label} />
+                <span>{item.label}</span>
               </a>
             </li>
           ))}

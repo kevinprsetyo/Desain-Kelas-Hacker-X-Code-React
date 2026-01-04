@@ -81,6 +81,8 @@ const courses = coursesData.map(course => ({
 export default function Biaya() {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [offset, setOffset] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
   const sliderRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -91,6 +93,33 @@ export default function Biaya() {
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev === courses.length - 1 ? 0 : prev + 1));
   }, []);
+
+  // Touch handlers for swipe
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      handleNext();
+    }
+    if (isRightSwipe) {
+      handlePrev();
+    }
+
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
 
   const calculateOffset = useCallback(() => {
     if (containerRef.current && sliderRef.current && sliderRef.current.children[currentIndex]) {
@@ -123,7 +152,11 @@ export default function Biaya() {
       <div className="slider-container" ref={containerRef}>
         <button className="nav-btn prev" onClick={handlePrev}><img src={right} alt="Previous" /></button>
 
-        <div className="slider" ref={sliderRef} style={{ transform: `translateX(${offset}px)` }}>
+        <div className="slider" ref={sliderRef} style={{ transform: `translateX(${offset}px)` }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           {courses.map((course, idx) => (
             <div
               key={idx}

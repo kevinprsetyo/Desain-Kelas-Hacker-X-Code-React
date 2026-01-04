@@ -3,7 +3,7 @@ import about from "../../assets/images/training2.png"
 
 export default function About() {
   return (
-    <section className="about-us" id="About Us">
+    <section className="about-us" id="AboutUs">
       <section className="decs">
         <h3 className="title-about">About Us</h3>
         <p className="text4">

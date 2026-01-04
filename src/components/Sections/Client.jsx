@@ -140,7 +140,7 @@ function ClientPartnerSection() {
   const [activeTab, setActiveTab] = useState("Training");
 
   return (
-    <div className="client-partner" id="Our Client">
+    <div className="client-partner" id="OurClient">
       <h2>Client and Partner</h2>
       <p>
         Kami sudah bekerja sama dengan berbagai klien dan mitra mulai dari universitas, perusahaan baik dalam negeri maupun luar negeri.

@@ -17,7 +17,7 @@ const mentorData = [
 
 const Mentors = () => {
     return (
-        <section className="mentor-section">
+        <section className="mentor-section" id='TeamAndMentor'>
             <div className="section-header">
                 <h2>Mentor dan Karyawan</h2>
                 <p>Kami menghadirkan pengajar terbaik dari industri untuk memberikan Anda keterampilan praktis yang mutakhir</p>
@@ -32,8 +32,8 @@ const Mentors = () => {
                                 <p className="experience">{mentor.role}</p>
                             </div>
                             <div className="card-footer">
-                                <span className="course-tag">Course</span>
-                                <span className="rating">★ 4.8</span>
+                                {/* <span className="course-tag">Course</span> */}
+                                {/* <span className="rating">★ 4.8</span> */}
                             </div>
                         </div>
                     </div>
